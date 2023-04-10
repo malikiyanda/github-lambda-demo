@@ -1,1 +1,1 @@
-# -github-lambda-demo
+# github-lambda-demo
