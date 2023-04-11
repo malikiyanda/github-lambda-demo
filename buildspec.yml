@@ -1,4 +1,5 @@
 version: 0.2
+
 phases:
   install:
     runtime-versions:
@@ -15,6 +16,12 @@ phases:
       - zip -g deployment_package.zip lambda_function.py
   post_build:
     commands:
-      - echo "Updating lambda Function..."
+      - echo "Updating Lambda function..."
       - aws lambda update-function-code --function-name github-lambda-demo --zip-file fileb://deployment_package.zip
+      # Publish a new layer version and capture the response
+      - response=$(aws lambda publish-layer-version --layer-name pandas-layer --description "Pandas library" --compatible-runtimes python3.9 --content S3Bucket=github-lambda-demo-layers,S3Key=pandas-layer.zip)
+      # Extract the version number from the response JSON using jq (assuming you have it installed)
+      - version=$(echo $response | jq -r '.Version')
+      # Update the Lambda function configuration with the new layer version
+      - aws lambda update-function-configuration --function-name github-lambda-demo --layers arn:aws:lambda:us-east-1:648403326966:layer:pandas-layer:$version
       - echo "DONE!!"
