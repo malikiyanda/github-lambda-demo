@@ -7,7 +7,6 @@ phases:
     commands:
       - echo "Installing dependencies..."
       - pip install -r requirements.txt -t lib
-      - pip install --upgrade awscli.
   build:
     commands:
       - echo "Zipping deployment package..."
