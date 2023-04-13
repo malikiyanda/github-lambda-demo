@@ -8,8 +8,8 @@ phases:
       # - echo "Installing dependencies..."
       # - pip install -r requirements.txt 
       # - pip install -r requirements.txt -t python/
-      - zip -r9 python.zip python/
-      - aws s3 cp python.zip s3://github-lambda-demo-layers/
+      # - zip -r9 python.zip python/
+      # - aws s3 cp python.zip s3://github-lambda-demo-layers/
   build:
     commands:
       # - echo "Zipping deployment package..."
