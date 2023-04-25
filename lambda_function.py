@@ -1,7 +1,6 @@
-import pandas as pd
+from sqlalchemy import create_engine
 
 def lambda_handler(event, context):
-     d = {'col1': [1,2], 'col2': [3,4]}
-     df = pd.DataFrame(data=d)
-     print(df)
-     print('Done x1.2')
+     #create DB engine 
+     engine = create_engine('postgresql://postgres:testpostgresdb@malik-database.cujukyhtv5pn.us-east-1.rds.amazonaws.com:5432/navitascustomer', connect_args={'options': '-c search_path=customerrequest'})
+     
